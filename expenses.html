@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expenses</title>
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f1f4f9;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:#2e7d32; /* GREEN THEME */
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    padding:20px;
+    padding-bottom:120px;
+}
+
+/* TITLE */
+.tagline{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:20px;
+    color:#2e7d32;
+}
+
+/* GRID */
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+/* CARD */
+.card{
+    background:linear-gradient(145deg,#ffffff,#e6ebf1);
+    border-radius:16px;
+    padding:25px 15px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.25s;
+
+    box-shadow:
+        6px 6px 14px rgba(0,0,0,0.12),
+        -6px -6px 14px rgba(255,255,255,0.8);
+}
+
+.card span{
+    font-size:32px;
+    display:block;
+    margin-bottom:10px;
+}
+
+.card h3{
+    font-size:16px;
+    color:#2e7d32;
+}
+
+/* HOVER */
+.card:hover{
+    transform:translateY(-6px);
+}
+
+/* SELECTED */
+.card.selected{
+    background:linear-gradient(145deg,#c8e6c9,#a5d6a7);
+    color:#1b5e20;
+    transform:scale(0.96);
+
+    box-shadow:
+        inset 5px 5px 10px rgba(0,0,0,0.15),
+        inset -5px -5px 10px rgba(255,255,255,0.8);
+}
+
+/* NEXT BUTTON */
+.next-container{
+    position:fixed;
+    bottom:-80px;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    transition:0.4s ease;
+}
+
+.next-container.show{
+    bottom:70px;
+}
+
+.next-btn{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:15px 40px;
+    font-size:16px;
+    border-radius:30px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.2);
+    cursor:pointer;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+    background:#fff;
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+    box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+.nav-item{
+    text-align:center;
+    font-size:12px;
+    color:#777;
+}
+
+.nav-item span{
+    font-size:22px;
+    display:block;
+}
+
+.nav-item.active{
+    color:#2e7d32;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">💰 Expenses Manager</div>
+
+<div class="main">
+
+    <div class="tagline">Select Expense Category</div>
+
+    <!-- CATEGORY GRID -->
+    <div class="dashboard">
+
+        <div class="card" onclick="selectOne(this)">
+            <span>🍔</span><h3>Food</h3>
+        </div>
+
+        <div class="card" onclick="selectOne(this)">
+            <span>🚗</span><h3>Transport</h3>
+        </div>
+
+        <div class="card" onclick="selectOne(this)">
+            <span>🏠</span><h3>Rent</h3>
+        </div>
+
+        <div class="card" onclick="selectOne(this)">
+            <span>🛒</span><h3>Shopping</h3>
+        </div>
+
+        <div class="card" onclick="selectOne(this)">
+            <span>💡</span><h3>Bills</h3>
+        </div>
+
+        <div class="card" onclick="selectOne(this)">
+            <span>🎬</span><h3>Entertainment</h3>
+        </div>
+
+        <div class="card" onclick="selectOne(this)">
+            <span>🏥</span><h3>Medical</h3>
+        </div>
+
+        <div class="card" onclick="selectOne(this)">
+            <span>📚</span><h3>Education</h3>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- NEXT BUTTON -->
+<div class="next-container" id="nextBox">
+    <button class="next-btn">Add Expense →</button>
+</div>
+
+<!-- NAVBAR -->
+<div class="bottom-nav">
+    <div class="nav-item active"><span>🏠</span>Home</div>
+    <div class="nav-item"><span>➕</span>Add</div>
+    <div class="nav-item"><span>📊</span>Reports</div>
+    <div class="nav-item"><span>⚙️</span>Settings</div>
+</div>
+
+<script>
+
+/* SINGLE SELECT LOGIC */
+function selectOne(card){
+
+    // remove selection from all cards
+    document.querySelectorAll(".card")
+        .forEach(c => c.classList.remove("selected"));
+
+    // select clicked card
+    card.classList.add("selected");
+
+    // show next button
+    document.getElementById("nextBox").classList.add("show");
+}
+
+</script>
+
+</body>
+</html>
